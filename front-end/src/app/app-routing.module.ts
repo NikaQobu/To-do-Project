@@ -8,6 +8,7 @@ import { CompletedTasksComponent } from './pages/completed-tasks/completed-tasks
 import { AddTaskComponent } from './pages/add-task/add-task.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'addtask', component: AddTaskComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'changepassword', component: ChangePasswordComponent },
+  { path: 'edittask', component: EditTaskComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
