@@ -1,0 +1,23 @@
+<div class="login">
+  <div class="move-container">
+    <div class="container">
+      <div class="inputs" [formGroup]="loginForm">
+        <input placeholder="Username" type="text" formControlName="user" />
+        <input
+          placeholder="Password"
+          type="password"
+          formControlName="password"
+        />
+      </div>
+      <div class="validation-error" *ngIf="errorMessage">
+        * {{ errorMessage }}
+      </div>
+      <div class="btn">
+        <button (click)="login()" [disabled]="loginForm.invalid">შესვლა</button>
+      </div>
+      <div class="text">
+        <a (click)="openRegister()">Create Account</a>
+      </div>
+    </div>
+  </div>
+</div>

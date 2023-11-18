@@ -1,0 +1,110 @@
+@import "./media/headerMedia.scss";
+@import "../../share/colors.scss";
+@import "../../share/mixins.scss";
+@import "../../share/animations.scss";
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  width: 90%;
+  margin: auto;
+  background-color: $background;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    color: $text;
+    .side {
+      ul {
+        height: 60px;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        li {
+          padding: 1rem;
+          height: 100%;
+        }
+        
+        .dropdown {
+          position: relative;
+          display: inline-block;
+          padding: 0rem 3rem;
+          min-width: 100px;
+          
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 150px;
+            top:3.7rem;
+            left:0;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            a {
+              color: black;
+              padding: .7rem;
+              text-decoration: none;
+              display: block;
+            }
+            a:hover {
+              background-color: #ddd;
+            }
+          }
+
+        }
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+        .drop-icon{
+          text-align: center;
+        }
+
+
+
+
+        .auth-text {
+          display: flex;
+          align-items: center;
+        }
+        .logged-in {
+          display: flex;
+          align-items: center;
+          
+          .notifications {
+            display: flex;
+            .count {
+              color: $notifications;
+              transform: translateY(-50%);
+            }
+          }
+        }
+        .menu-text {
+          @extend .auth-text;
+        }
+        li:hover {
+          cursor: pointer;
+          background-color: $hover;
+        }
+      }
+    }
+    .right {
+      .auth-icon {
+        display: none;
+      }
+      .profile-img {
+        @include background-image;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid $border;
+      }
+    }
+    .left {
+      .menu-icon {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,133 @@
+<div class="container-contact">
+  <div class="send-successe" *ngIf="statusSendMessage">
+    <h5>Message Send successed !</h5>
+    <button (click)="updatestatusSendMessage()">OK</button>
+  </div>
+  <div class="message-contact">
+    <div class="contact-text">
+      <h1>Contact Us</h1>
+      <p>
+        Do you have any comments, questions, or feedback to share with us? if
+        you do, message or call our team, we'd love to hear from you
+      </p>
+    </div>
+    <form action="" [formGroup]="contactForm">
+      <div class="errors">
+        <div
+          class="validation-error"
+          *ngIf="controls.email.errors?.['required'] && controls.email.dirty"
+        >
+          *This field is required !
+        </div>
+        <div
+          class="validation-error"
+          *ngIf="controls.email.errors?.['email'] && controls.email.dirty"
+        >
+          *Ivalid email !
+        </div>
+        <div
+          class="validation-error"
+          *ngIf="controls.name.errors?.['required'] && controls.name.dirty"
+        >
+          *This field is required !
+        </div>
+        <div
+          class="validation-error"
+          *ngIf="controls.name.errors?.['minlength'] && controls.name.dirty"
+        >
+          *This name is too short !
+        </div>
+        <div
+          class="validation-error"
+          *ngIf="controls.name.errors?.['maxlength'] && controls.name.dirty"
+        >
+          *This name is too long !
+        </div>
+        <div
+          class="validation-error"
+          *ngIf="controls.name.errors?.['pattern'] && controls.name.dirty"
+        >
+          *This name started with symbols or numbers !
+        </div>
+      </div>
+      <div class="inputs">
+        <input
+          name="email"
+          type="email"
+          placeholder="Email Adress"
+          formControlName="email"
+        />
+
+        <input
+          name="name"
+          type="name"
+          placeholder="Name here"
+          formControlName="name"
+          maxlength="25"
+          minlength="2"
+        />
+      </div>
+      <div class="message-input">
+        <div
+          class="validation-error"
+          *ngIf="controls.message.errors?.['required'] && controls.message.dirty"
+        >
+          *This field is required !
+        </div>
+        <div
+          class="validation-error"
+          *ngIf="controls.message.errors?.['maxlength'] && controls.message.dirty"
+        >
+          *This text is too long !
+        </div>
+        <div
+          class="validation-error"
+          *ngIf="controls.message.errors?.['minlength'] && controls.message.dirty"
+        >
+          *This text is too short !
+        </div>
+        <textarea
+          type="text"
+          name="message"
+          cols="30"
+          rows="10"
+          formControlName="message"
+          placeholder="Your message here"
+          maxlength="400"
+        ></textarea>
+      </div>
+      <div class="validation-error" *ngIf="errorMessage">
+        * {{ errorMessage }}
+      </div>
+      <div class="send-message">
+        <button (click)="sendEmail()" [disabled]="contactForm.invalid">
+          Send Message
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="call-contact">
+    <h4>Georgia / Kutaisi</h4>
+    <p>
+      If you want to get in contact with us anytime on the number below. We'd
+      love to hear from you.
+    </p>
+    <div class="number">
+      <span class="material-symbols-outlined call"> call </span>
+      <span>+995 598 360 361</span>
+    </div>
+    <div class="number">
+      <span class="material-symbols-outlined call"> call </span>
+      <span>+995 598 360 361</span>
+    </div>
+    <div class="work">
+      <span>Monday-Friday</span>
+      <h4>9:00am - 7:00pm</h4>
+    </div>
+    <div class="work">
+      <span>Saturday-Sunday</span>
+      <h4>10:00am - 6:00pm</h4>
+    </div>
+  </div>
+</div>

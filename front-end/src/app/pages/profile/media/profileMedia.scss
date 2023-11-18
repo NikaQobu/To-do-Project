@@ -1,0 +1,15 @@
+@media only screen and (max-width: 400px) {
+    .profile{
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 325px) {
+    .profile{
+        .change-img-btn{
+            button{
+                margin-left: 1rem !important;
+            }
+        }
+    }
+}

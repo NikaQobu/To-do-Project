@@ -1,0 +1,40 @@
+@media only screen and (max-width: 1100px) {
+    .call-contact {
+        .number{
+            width: 70% !important; 
+        }
+    }
+}
+@media only screen and (max-width: 900px) {
+    .call-contact {
+        .number{
+            width: 90% !important; 
+        }
+    }
+}
+@media only screen and (max-width: 700px) {
+    .call-contact {
+        .number{
+            width: 100% !important; 
+        }
+    }
+}
+@media only screen and (max-width: 700px) {
+    .container-contact{
+        width: 95% !important;
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .container-contact{
+        flex-direction: column !important;
+        margin: 2rem auto !important;
+        .message-contact{
+            width: 100% !important;
+        }
+        .call-contact{
+            margin-top: 5rem;
+            width: 100% !important;
+        }
+    }
+}

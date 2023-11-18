@@ -1,0 +1,160 @@
+<div class="register">
+  <div class="move-container">
+    <div class="container">
+      <div class="inputs" [formGroup]="registerForm">
+        <div class="name">
+          <input placeholder="Name" type="text" formControlName="name" />
+          <div
+            class="validation-error"
+            *ngIf="!(controls.name.errors?.['maxLength'] | json) && controls.name.dirty"
+          >
+            * Max 18 characters
+          </div>
+          <div
+            class="validation-error"
+            *ngIf="!(controls.name.errors?.['minLength'] | json) && controls.name.dirty"
+          >
+            * Min 2 characters
+          </div>
+
+          <div
+            class="validation-error"
+            *ngIf="controls.name.errors?.['required'] && controls.name.dirty"
+          >
+            * Field is required
+          </div>
+          <div
+            class="validation-error"
+            *ngIf="controls.name.errors?.['pattern']"
+          >
+            * Need include only symbols
+          </div>
+        </div>
+        <div class="lastname">
+          <input
+            placeholder="Lastname"
+            type="text"
+            formControlName="lastName"
+          />
+          <div
+            class="validation-error"
+            *ngIf="!(controls.lastName.errors?.['maxLength'] | json) && controls.lastName.dirty"
+          >
+            * Max 18 characters
+          </div>
+          <div
+            class="validation-error"
+            *ngIf="!(controls.lastName.errors?.['minLength'] | json) && controls.lastName.dirty"
+          >
+            * Min 2 characters
+          </div>
+          <div
+            class="validation-error"
+            *ngIf="controls.lastName.errors?.['required'] && controls.lastName.dirty"
+          >
+            * Field is required
+          </div>
+          <div
+            class="validation-error"
+            *ngIf="controls.lastName.errors?.['pattern'] && controls.lastName.dirty"
+          >
+            * Need incclude only simbols
+          </div>
+        </div>
+        <div class="phone">
+          <input placeholder="Phone" type="text" formControlName="phone" />
+          <div
+            class="validation-error"
+            *ngIf="!(controls.phone.errors?.['minLength'] | json) && controls.phone.dirty"
+          >
+            * Need 9 characters
+          </div>
+          <div
+            class="validation-error"
+            *ngIf="controls.phone.errors?.['required'] && controls.phone.dirty"
+          >
+            * Field is required
+          </div>
+          <div
+            class="validation-error"
+            *ngIf="controls.phone.errors?.['pattern'] && controls.phone.dirty"
+          >
+            * Invalid phone number
+          </div>
+        </div>
+        <div class="user">
+          <input placeholder="Username" type="text" formControlName="user" />
+          <div
+            class="validation-error"
+            *ngIf="!(controls.user.errors?.['maxLength'] | json) && controls.user.dirty"
+          >
+            * Max 18 characters
+          </div>
+          <div
+            class="validation-error"
+            *ngIf="!(controls.user.errors?.['minLength'] | json) && controls.user.dirty"
+          >
+            * Min 4 characters
+          </div>
+          <div
+            class="validation-error"
+            *ngIf="controls.user.errors?.['required'] && controls.user.dirty"
+          >
+            * Field is required
+          </div>
+          <div
+            class="validation-error"
+            *ngIf="controls.user.errors?.['pattern'] && controls.user.dirty"
+          >
+            * Need include only symbols or numbers
+          </div>
+        </div>
+
+        <div class="password">
+          <input
+            placeholder="Password"
+            type="password"
+            formControlName="password"
+            (input)="controls.confirmPassword.updateValueAndValidity()"
+          />
+          <div
+            class="validation-error"
+            *ngIf="!(controls.password.errors?.['maxLength'] | json) && controls.password.dirty"
+          >
+            * Max 18 characters
+          </div>
+          <div
+            class="validation-error"
+            *ngIf="!(controls.password.errors?.['minLength'] | json) && controls.password.dirty"
+          >
+            * Min 8 characters
+          </div>
+        </div>
+        <div class="confirmpassword">
+          <input
+            placeholder="confirm password"
+            type="password"
+            formControlName="confirmPassword"
+          />
+          <div
+            class="validation-error"
+            *ngIf="controls.confirmPassword.errors?.['confirm'] && controls.confirmPassword.dirty"
+          >
+            * {{ controls.confirmPassword.errors?.['confirm']  }}
+          </div>
+        </div>
+      </div>
+      <div class="validation-error" *ngIf="errorMessage">
+        * {{ errorMessage }}
+      </div>
+      <div class="btn">
+        <button (click)="register()" [disabled]="registerForm.invalid">
+          Register
+        </button>
+      </div>
+      <div class="text">
+        <a (click)="openLogin()">Log In</a>
+      </div>
+    </div>
+  </div>
+</div>

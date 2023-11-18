@@ -1,0 +1,37 @@
+@import "./media/homeMedia.scss";
+@import "../../share/colors.scss";
+@import "../../share/mixins.scss";
+@import "../../share/animations.scss";
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.home{
+    .container{
+        width: 90%;
+        margin: auto;
+        .img{
+            @include background-image;
+            background-position: top;
+            border: 1px solid black;
+            width: 100%;
+            padding: 15rem 0rem;
+            background-image: url("https://shorturl.at/sYZ49");
+            .btn{
+
+                width: 70%;
+                text-align: end;
+                button{
+                    @include button;
+                    padding: 1.5rem 3rem;
+                }
+                button:hover{
+                    cursor: pointer;
+                    background-color: $hover;
+                }
+            }
+        }
+    }
+}

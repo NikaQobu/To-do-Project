@@ -1,0 +1,18 @@
+@mixin button {
+  background-color: $button;
+  color: $text;
+  padding: 0.7rem 1.4rem;
+  border-radius: 0.4rem;
+  border: none;
+}
+@mixin input {
+  margin: 1rem auto;
+  outline: none;
+  padding: 0.4rem 0.2rem;
+}
+
+@mixin background-image{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

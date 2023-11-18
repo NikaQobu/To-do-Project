@@ -1,0 +1,60 @@
+@import "../../share/colors.scss";
+@import "../../share/mixins.scss";
+@import "../../share/animations.scss";
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.register {
+  width: 100%;
+  position: relative;
+  .validation-error {
+    width: 80%;
+    margin: auto;
+    color: $validation;
+  }
+  .move-container {
+    animation: move-to-down 0.6s ease-in;
+    margin-top: 1rem;
+    width: 100%;
+    position: absolute;
+    .container {
+      padding: 1rem 0rem;
+      margin: auto;
+      max-width: 450px;
+      min-width: 200px;
+      border: 1px solid $border;
+      border-radius: 0.4rem;
+      .inputs {
+        input {
+          @include input;
+          display: block;
+          width: 80%;
+        }
+
+      }
+      .btn {
+        text-align: end;
+        width: 80%;
+        margin: auto;
+        button {
+          @include button;
+        }
+        button:hover {
+          cursor: pointer;
+          color: $hover;
+        }
+      }
+      .text {
+        width: 80%;
+        margin: auto;
+        a:hover {
+          cursor: pointer;
+          color: $hover;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

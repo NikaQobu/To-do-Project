@@ -1,0 +1,56 @@
+<div class="profile">
+  <h3>User Information</h3>
+  <div class="change-profile-img">
+    <div
+      class="profile-img"
+      [style.backgroundImage]="'url(' + profileImg + ')'"
+    ></div>
+    <div class="change-img-btn">
+      <button>Change Picture</button>
+    </div>
+  </div>
+
+  <div class="info">
+    <div class="right-side">
+      <div class="name">
+        <p>Name</p>
+        <input type="text" [(ngModel)]="userInfoData.name" />
+      </div>
+      <div class="username">
+        <p>User</p>
+        <input readonly type="text" [(ngModel)]="userInfoData.user" />
+      </div>
+    </div>
+    <div class="left-side">
+      <div class="lName">
+        <p>Lastname</p>
+        <input type="text" [(ngModel)]="userInfoData.lastname" />
+      </div>
+      <div class="phone">
+        <p>Phone</p>
+        <input type="text" [(ngModel)]="userInfoData.phone" />
+      </div>
+    </div>
+  </div>
+  <div class="succsessMessage" *ngIf="succsessMessage">
+    * {{ succsessMessage }}
+  </div>
+  <div class="errorMessage" *ngIf="errorMessage">* {{ errorMessage }}</div>
+
+  <div class="save-btn">
+    <button (click)="checkUserInfo()">Save Changes</button>
+  </div>
+  <div class="full-container" *ngIf="isCorrectUserInfo">
+    <div class="verify-container">
+      <div class="text">
+        <p>For changes you must pass the verification, write into a correct password</p>
+      </div>
+      <div class="inputs">
+        <input type="password" [(ngModel)]="verifyPassword" />
+      </div>
+      <div class="btn">
+        <button (click)="changeUserInfo()">Verification</button>
+      </div>
+    </div>
+  </div>
+</div>

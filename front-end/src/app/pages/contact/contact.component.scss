@@ -1,0 +1,98 @@
+@import "./media/contactMedia.scss";
+@import "../../share/colors.scss";
+@import "../../share/mixins.scss";
+@import "../../share/animations.scss";
+.validation-error {
+  color: $validation;
+}
+.container-contact {
+  width: 80%;
+  margin: 5rem auto;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  .send-successe {
+    border: 1px solid $border;
+    width: 50%;
+    text-align: center;
+    padding: 4rem 0rem;
+    color: $succsess;
+    margin: 5rem auto;
+    border-radius: 1rem;
+    max-width: 500px;
+    max-height: 300px;
+    position: absolute;
+    left: 30%;
+    
+    button {
+      margin-top: 1rem;
+      width: 35%;
+      border: none;
+      background-color: $button;
+      border-radius: 1rem;
+      color:$text;
+    }
+    button:hover {
+      cursor: pointer;
+      background-color: $hover;
+    }
+  }
+  .message-contact {
+    width: 60%;
+    .inputs {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0rem;
+      input {
+        width: 48%;
+        padding: 0.8rem 0rem;
+        outline: none;
+        padding-left: 0.5rem;
+      }
+    }
+    .message-input {
+      textarea {
+        width: 98.5%;
+        padding-top: .5rem;
+        padding-left: .5rem;
+        resize: none;
+        padding-top: 0.5rem;
+        outline: none;
+      }
+    }
+    .send-message {
+      text-align: end;
+      margin-top: 2rem;
+      button {
+        padding: 1rem 2rem;
+        border: 1px solid $text;
+        background-color: $button;
+        color: $text;
+      }
+      button:hover {
+        cursor: pointer;
+        background-color: $hover;
+      }
+    }
+  }
+
+  .call-contact {
+    width: 35%;
+    
+    .number {
+      border: 1px solid $border;
+      width: 60%;
+      border-radius: 1rem;
+      padding: 1rem 0rem;
+      text-align: center;
+      margin: 1rem 0rem;
+      color: $hover;
+      .call {
+        padding-right: 0.5rem;
+      }
+    }
+    .number:hover {
+      cursor: text;
+    }
+  }
+}

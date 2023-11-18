@@ -1,0 +1,30 @@
+@media only screen and (max-width: 1000px) {
+  .header {
+    width: 90% !important;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .header {
+    width: 100% !important;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .right {
+    .auth-icon {
+      display: block !important;
+    }
+    .auth-text {
+      display: none !important;
+    }
+  }
+}
+@media only screen and (max-width: 550px) {
+  .left {
+    .menu-icon {
+      display: block !important;
+    }
+    .menu-text {
+      display: none !important;
+    }
+  }
+}

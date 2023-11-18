@@ -1,0 +1,119 @@
+@import "./media/profileMedia.scss";
+@import "../../share/colors.scss";
+@import "../../share/mixins.scss";
+@import "../../share/animations.scss";
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.profile {
+  width: 80%;
+  margin: 2rem auto;
+  .succsessMessage {
+    color: $succsess;
+    margin-top: 0.5rem;
+  }
+  .errorMessage {
+    color: $validation;
+    margin-top: 0.5rem;
+  }
+  .change-profile-img {
+    margin-top: 2rem;
+    display: flex;
+
+    .profile-img {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      box-shadow: 0rem 0rem 0.2rem 0rem $border;
+    }
+    .change-img-btn {
+      button {
+        @include button;
+        margin-top: 2rem;
+        margin-left: 2rem;
+        padding: 0.8rem 1.5rem;
+        border-radius: 0.6rem;
+      }
+      button:hover {
+        cursor: pointer;
+        background-color: $hover;
+      }
+    }
+  }
+
+  .info {
+    display: flex;
+    justify-content: space-between;
+    .right-side {
+      width: 45%;
+      p {
+        margin: 1rem 0rem;
+      }
+      input {
+        @include input;
+        margin: 0rem auto;
+        width: 100%;
+        padding: 0.8rem 1.5rem;
+      }
+    }
+    .left-side {
+      @extend .right-side;
+    }
+  }
+
+  .save-btn {
+    text-align: end;
+    button {
+      @include button;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.6rem;
+    }
+    button:hover {
+      cursor: pointer;
+      background-color: $hover;
+    }
+  }
+
+  .full-container {
+    width: 50%;
+    max-width: 400px;
+    min-width: 250px;
+    margin: auto;
+    transform: translateY(-150%);
+    background-color: $password-verify-window;
+    .verify-container {
+      padding: 1rem 0rem;
+      .text{
+        width: 80%;
+        margin: auto;
+      }
+      .inputs {
+        text-align: center;
+        input {
+          @include input;
+          width: 80%;
+          border: none;
+        }
+      }
+      .btn {
+        text-align: end;
+        width: 80%;
+        margin: auto;
+        button {
+          @include button;
+        }
+        button:hover{
+          cursor: pointer;
+          background-color: $hover;
+        }
+      }
+    }
+  }
+}

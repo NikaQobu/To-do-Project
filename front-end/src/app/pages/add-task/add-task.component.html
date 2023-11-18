@@ -1,0 +1,67 @@
+<div class="add-task">
+  <div class="container" [formGroup]="addTaskForm">
+    <div class="inputs">
+      <input
+        class="title"
+        placeholder="Title"
+        type="text"
+        formControlName="title"
+      />
+      <span
+        class="validation-error"
+        *ngIf="controls.title.errors?.['required']"
+      >
+        *
+      </span>
+
+      <input class="dedline" type="date" formControlName="deadline" />
+      <span
+        class="validation-error"
+        *ngIf="controls.deadline.errors?.['required']"
+      >
+        *
+      </span>
+    </div>
+
+    <div class="priority-level">
+      <label for="priority-level">Priority Level:</label>
+
+      <select name="priority-level" formControlName="priority">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+      <span
+        class="validation-error"
+        *ngIf="controls.priority.errors?.['required']"
+      >
+        *
+      </span>
+    </div>
+    <textarea
+      placeholder="Description"
+      name=""
+      id=""
+      cols="30"
+      rows="10"
+      formControlName="description"
+    ></textarea>
+    <span
+      class="validation-error"
+      *ngIf="controls.description.errors?.['required']"
+    >
+      *
+    </span>
+    <div class="validation-error" *ngIf="errorMessage && !succsessMessage">
+      * {{ errorMessage }}
+    </div>
+    <div class="succsessMessage" *ngIf="succsessMessage && !errorMessage">
+      * {{ succsessMessage }}
+    </div>
+    <div class="btn">
+      <button (click)="addTask()" [disabled]="addTaskForm.invalid">
+        Add Task
+      </button>
+    </div>
+  </div>
+</div>

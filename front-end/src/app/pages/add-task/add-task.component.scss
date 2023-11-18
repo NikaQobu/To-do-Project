@@ -1,0 +1,68 @@
+@import "./media/addTaskMedia.scss";
+@import "../../share/colors.scss";
+@import "../../share/mixins.scss";
+@import "../../share/animations.scss";
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+.add-task {
+  width: 60%;
+  margin: 2rem auto;
+
+  .container {
+    margin: auto;
+    text-align: center;
+    .validation-error {
+      text-align: start;
+      color: $validation;
+    }
+    .succsessMessage {
+      text-align: start;
+      color: $succsess;
+    }
+    .inputs {
+      input {
+        @include input;
+        text-align: center;
+        width: 80%;
+      }
+    }
+    .priority-level {
+      width: 80%;
+      margin: 1rem auto;
+      select {
+        outline: none;
+        padding-left: 1.7rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        margin-left: 0.5rem;
+        padding-right: 1rem;
+      }
+      select:hover {
+        cursor: pointer;
+      }
+    }
+    textarea {
+      resize: none;
+      width: 80%;
+      min-height: 200px;
+      padding-top: 0.5rem;
+      padding-left: 0.5rem;
+      outline: none;
+    }
+    .btn {
+      width: 80%;
+      margin: auto;
+      padding-top: 1rem;
+      text-align: end;
+      button {
+        @include button;
+      }
+      button:hover {
+        cursor: pointer;
+        background-color: $hover;
+      }
+    }
+  }
+}

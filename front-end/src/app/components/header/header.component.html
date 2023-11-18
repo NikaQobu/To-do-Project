@@ -1,0 +1,51 @@
+<div class="header">
+  <div class="container">
+    <div class="left side">
+      <ul>
+        <li class="menu-text" routerLink="/home">Main</li>
+        <li class="menu-text dropdown" *ngIf="user$ | async">
+          <span>My Tasks</span>
+          <div class="dropdown-content">
+            <a routerLink="/alltasks">All</a>
+            <a routerLink="/activetasks">Active</a>
+            <a routerLink="/complatedtasks">Complated</a>
+          </div>
+        </li>
+        <li class="menu-text" routerLink="/contact">Contact</li>
+        <li class="menu-icon">
+          <span class="material-symbols-outlined"> list </span>
+        </li>
+      </ul>
+    </div>
+    <div class="right side">
+      <ul *ngIf="!(user$ | async)">
+        <li class="auth-text" (click)="openLogin()">Log In</li>
+        <li class="auth-text" (click)="openRegister()">Registration</li>
+        <li class="auth-icon">
+          <span class="material-symbols-outlined"> menu </span>
+        </li>
+      </ul>
+      <ul *ngIf="user$ | async">
+        <li class="logged-in">
+          <div class="notifications">
+            <span class="material-symbols-outlined">
+              notifications_active
+            </span>
+            <div class="count">
+              <span>0</span>
+            </div>
+          </div>
+        </li>
+        <li class="logged-in dropdown drop-icon">
+          <div class="profile-img"></div>
+          <div class="dropdown-content">
+            <a routerLink="/addtask">Add Task</a>
+            <a routerLink="/profile">Profile</a>
+            <a routerLink="/changepassword">Change Password</a>
+            <a (click)="logout()">Log Out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
