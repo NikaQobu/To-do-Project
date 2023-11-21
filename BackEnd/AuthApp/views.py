@@ -4,13 +4,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password,check_password
 import json
 from .models import Users
+from ProfileApp.models import UserProfile
 from AuthApp.validations import Validations
 
 
 
-def test(request,id):
-    print(id)
-    return JsonResponse({"gvgv":"dxdxxf", "ასლკდნასკლდას":"ასდასდასდ", "id":id}, status="200", json_dumps_params={'ensure_ascii': False})
+#def test(request,id):
+#    print(id)
+#    return JsonResponse({"gvgv":"dxdxxf", "ასლკდნასკლდას":"ასდასდასდ", "id":id}, status="200", json_dumps_params={'ensure_ascii': False})
 
 @csrf_exempt  # NOTE: This is used to exempt this view from CSRF protection for simplicity. In a production environment, you should handle CSRF properly.
 def register(request):
@@ -61,9 +62,13 @@ def register(request):
                 } 
             else:
                 hashed_password = make_password(password) 
-                Users.objects.create(name=name, lastname=lastName, phone=phone, user=user, password=hashed_password)
-                #new_user = Users(name=name, lastname=lastName, user=user, password=password)
-                #new_user.save()
+                #Users.objects.create(name=name, lastname=lastName, phone=phone, user=user, password=hashed_password)
+                
+                new_user = Users(name=name, lastname=lastName, phone=phone, user=user, password=hashed_password)
+                new_user.save()
+                
+                user_profile = UserProfile(user=new_user)
+                user_profile.save()
 
                 data = {
                     "success": True,
@@ -196,3 +201,4 @@ def logout(request):
     "status": 400
     }
     return JsonResponse(data, status = data.get("status"))
+

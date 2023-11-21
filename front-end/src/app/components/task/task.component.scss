@@ -1,3 +1,4 @@
+@import "./media/taskMedia.scss";
 @import "../../share/colors.scss";
 @import "../../share/mixins.scss";
 @import "../../share/animations.scss";
@@ -12,33 +13,35 @@
   margin: 2rem auto;
   display: flex;
   .complated-tasks {
-
     .complated-tasks-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
       .complated-task {
+        max-width: 500px;
+        margin: auto;
         border: 1px solid black;
-        margin: 1rem 0rem;
-        padding-bottom: 4rem;
-        .btns{
-            text-align: end;
-            padding: .5rem 0rem;
-            button {
-                @include button;
-                margin: .5rem;
-              }
-              button:hover {
-                cursor: pointer;
-                background-color: $hover;
-              }
+        .btns {
+          text-align: end;
+          padding: 0.5rem 0rem;
+          button {
+            @include button;
+            margin: 0.5rem;
+          }
+          button:hover {
+            cursor: pointer;
+            background-color: $hover;
+          }
         }
         .table {
           width: 100%;
           text-align: center;
-          th{
+          th {
             border: 1px solid black;
           }
           td {
             width: 100px;
-
           }
         }
         .description {
@@ -53,5 +56,4 @@
       }
     }
   }
-
 }

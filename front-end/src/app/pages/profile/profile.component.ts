@@ -16,8 +16,7 @@ export class ProfileComponent implements OnInit {
   verifyPassword = '';
   isCorrectUserInfo: boolean = false;
 
-  profileImg =
-    'https://images.unsplash.com/photo-1618641986557-1ecd230959aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80';
+  profileImg = 'http://127.0.0.1:8000/media/default.jpeg';
 
   startUserInfoData = {
     user: '',

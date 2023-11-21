@@ -45,3 +45,8 @@ export interface AddTask {
   description: string;
   user?: string;
 }
+
+export interface ChangeTaskTatus {
+  taskid: number;
+  status: string;
+}

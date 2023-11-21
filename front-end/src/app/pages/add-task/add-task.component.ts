@@ -47,7 +47,9 @@ export class AddTaskComponent {
       })
     ).subscribe((response)=> {
       this.succsessMessage = "Task added successfully"
+      this.taskService.getTasks();
       this.addTaskForm.reset();
+      
       setInterval(() => {
         this.succsessMessage = '';
       }, 4000);

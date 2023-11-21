@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+import { TaskService } from './services/task.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private http: HttpClient,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private taskService: TaskService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -37,13 +39,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  isContainClass() {}
-
   ngOnInit(): void {
-    let x = 45
     this.userService.init();
-    this.http.get<any>(`http://127.0.0.1:8000/test/${x}`).subscribe((response)=> {
-      console.log(response)
-    });
   }
 }

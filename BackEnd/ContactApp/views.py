@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from ContactApp.validations import Validations
 from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import send_mail
 import json
 
 @csrf_exempt
@@ -12,7 +13,7 @@ def send_email(request):
             name = response.get("name")
             message = response.get("message")
             email = response.get("email")
-            
+            from_email = "nikakobuladze7@gmail.com"
             #print(name, message, email)  
             
             if Validations.is_valid_name(name) == False:
@@ -37,7 +38,7 @@ def send_email(request):
                         "status": 400
                     } 
             else:
-                
+                send_mail(name, message, from_email, email)
                 data = {
                         "success": True,
                         "message": "Email received successfully",

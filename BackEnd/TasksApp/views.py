@@ -6,6 +6,52 @@ from TasksApp.models import Tasks
 import json
 
 
+def get_tasks(request,user):
+    if request.method == "GET":
+        try:
+            registered_user = Users.objects.filter(user=user).first()
+            tasks = Tasks.objects.filter(user_id=registered_user.userid)
+            active_tasks = []
+            complated_tasks = []
+            for task in tasks:
+                info = {
+                    "taskID": task.taskid,
+                    "title": task.title,
+                    "deadline": task.deadline,
+                    "description": task.description,
+                    "priority": task.priority,
+                    "status": task.status
+                }
+                if task.status == "active":
+                    active_tasks.append(info)
+                else:
+                    complated_tasks.append(info)
+                
+            data = {
+                "success": True,
+                "active_tasks": active_tasks,
+                "complated_tasks": complated_tasks,
+                "message": "Tasks got successfully",
+                "csrf_token": get_token(request),
+                "status": 200
+                }
+            return JsonResponse(data, status=data.get("status"))
+        
+        except Exception as e:
+            data = {
+                "success": False,
+                "message": str(e),
+                "status": 409
+            }
+            return JsonResponse(data, status=data.get("status"))
+    else:
+        data = {
+            "success": False,
+            "message": "Invalid request method",
+            "status": 400
+        }
+        return JsonResponse(data, status=data.get("status"))
+     
 def add_task(request):
     if request.method == "POST":
         try:
@@ -57,3 +103,76 @@ def add_task(request):
         }
         return JsonResponse(data, status=data.get("status"))
 
+def delete_task(request,taskid):
+    if request.method == "GET":
+        try:
+            task = Tasks.objects.filter(taskid=taskid).first()
+            if task:
+                task.delete()
+                data = {
+                    "success": True,
+                    "message": "Tasks deleted successfully",
+                    "csrf_token": get_token(request),
+                    "status": 200
+                    }
+            else:
+                data = {
+                    "success": False,
+                    "message": "Task does not exist",
+                    "csrf_token": get_token(request),
+                    "status": 403
+                }
+            return JsonResponse(data, status=data.get("status"))
+        except Exception as e:
+            data = {
+                "success": False,
+                "message": str(e),
+                "status": 409
+            }
+            return JsonResponse(data, status=data.get("status"))
+    else:
+        data = {
+            "success": False,
+            "message": "Invalid request method",
+            "status": 400
+        }
+        return JsonResponse(data, status=data.get("status"))
+
+def change_task_status(request):
+    if request.method == "POST":
+        try:
+            response = json.loads(request.body.decode("utf-8"))
+            taskid= response.get("taskid")
+            status = response.get("status")
+            task = Tasks.objects.filter(taskid=taskid).first()
+            if task:
+                task.status = status
+                task.save()
+                data = {
+                    "success": True,
+                    "message": "Tasks deleted successfully",
+                    "csrf_token": get_token(request),
+                    "status": 200
+                    }
+            else:
+                data = {
+                    "success": False,
+                    "message": "Task does not exist",
+                    "csrf_token": get_token(request),
+                    "status": 403
+                }
+            return JsonResponse(data, status=data.get("status"))
+        except Exception as e:
+            data = {
+                "success": False,
+                "message": str(e),
+                "status": 409
+            }
+            return JsonResponse(data, status=data.get("status"))
+    else:
+        data = {
+            "success": False,
+            "message": "Invalid request method",
+            "status": 400
+        }
+        return JsonResponse(data, status=data.get("status"))

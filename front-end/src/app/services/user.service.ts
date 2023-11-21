@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ChaneProfileInfo, ChangePassword, CheckProfileInfo } from '../int/requestsint';
+import {
+  ChaneProfileInfo,
+  ChangePassword,
+  CheckProfileInfo,
+} from '../int/requestsint';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Urls } from '../env/urls';
 
@@ -10,7 +14,7 @@ import { Urls } from '../env/urls';
 export class UserService {
   baseUrl = new Urls().base;
   user$ = new BehaviorSubject<any>(null);
-  verifyPassword = "";
+  verifyPassword = '';
 
   constructor(private http: HttpClient) {}
 
@@ -34,7 +38,7 @@ export class UserService {
     });
   }
   changeProfileInfo(data: ChaneProfileInfo) {
-    data.password = this.verifyPassword
+    data.password = this.verifyPassword;
     return this.http.post<any>(`${this.baseUrl}/change_profile_info`, data, {
       withCredentials: true,
       headers: new HttpHeaders({

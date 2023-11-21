@@ -14,6 +14,7 @@ class Tasks(models.Model):
         ('High', 'High'),
     ]
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES)
+    status = models.CharField(max_length=255, default="active")
 
     def __str__(self):
         return self.title

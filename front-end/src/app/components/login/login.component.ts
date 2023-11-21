@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   errorMessage = '';
 
   loginForm = this.fb.group({
@@ -22,8 +23,11 @@ export class LoginComponent {
     private authService: AuthService,
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private taskService: TaskService
   ) {}
+
+  ngOnInit(): void {}
 
   openRegister() {
     this.authService.isOpenRegister$.next(true);
@@ -42,7 +46,7 @@ export class LoginComponent {
         catchError((error) => {
           this.errorMessage = error.error.message;
 
-          return of(); 
+          return of();
         })
       )
       .subscribe((response) => {
@@ -53,7 +57,8 @@ export class LoginComponent {
           localStorage.setItem('token', JSON.stringify(userToken));
           this.authService.isOpenLogin$.next(false);
           this.router.navigate(['/home']);
-          this.userService.init()
+          this.userService.init();
+          this.taskService.getTasks();
         }
       });
   }
