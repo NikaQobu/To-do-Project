@@ -3,7 +3,7 @@
     <div class="complated-tasks-container" *ngIf="isOpenAllTaskPage$ | async">
       <div class="complated-task" *ngFor="let task of activateTasks$ | async">
         <div class="btns">
-          <button (click)="activateTask(task.taskID)">Complate</button>
+          <button (click)="complateTask(task.taskID,'complated')">Complate</button>
           <button (click)="editTask(task.taskID)">Edit</button>
           <button (click)="deleteTask(task.taskID)">Delete</button>
         </div>
@@ -74,7 +74,7 @@
     >
       <div class="complated-task" *ngFor="let task of activateTasks$ | async">
         <div class="btns">
-          <button (click)="activateTask(task.taskID)">complate</button>
+          <button (click)="complateTask(task.taskID,'complated')">complate</button>
           <button (click)="editTask(task.taskID)">Edit</button>
           <button (click)="deleteTask(task.taskID)">Delete</button>
         </div>

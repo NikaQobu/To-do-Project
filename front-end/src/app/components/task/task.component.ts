@@ -52,6 +52,7 @@ export class TaskComponent implements OnInit {
       status: status
     }
     this.taskService.changeTaskStatus(data).pipe().subscribe((response)=> {
+      this.taskService.getTasks()
       console.log(response)
     })
     
