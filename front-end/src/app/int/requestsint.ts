@@ -50,3 +50,11 @@ export interface ChangeTaskTatus {
   taskid: number;
   status: string;
 }
+
+export interface EditTaskInformation {
+  title: string;
+  deadline: string;
+  description: string;
+  priority: string;
+  taskId: number | null;
+}

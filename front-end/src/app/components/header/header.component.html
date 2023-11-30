@@ -12,10 +12,17 @@
           </div>
         </li>
         <li class="menu-text" routerLink="/contact">Contact</li>
-        <li class="menu-icon">
+        <li class="menu-icon" (click)="changeIconMenuContentStatus()">
           <span class="material-symbols-outlined"> list </span>
         </li>
       </ul>
+      <div class="menu-icon-content" *ngIf="iconMenuContent" (click)="changeIconMenuContentStatus()">
+        <ul>
+          <li routerLink="/home" (click)="changeIconMenuContentStatus()"><a >Main</a></li>
+          <li routerLink="/alltasks" (click)="changeIconMenuContentStatus()"><a >My Tasks</a></li>
+          <li routerLink="/contact" (click)="changeIconMenuContentStatus()"><a >Contact</a></li>
+        </ul>
+      </div>
     </div>
     <div class="right side">
       <ul *ngIf="!(user$ | async)">

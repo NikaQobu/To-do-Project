@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class HeaderComponent {
   errorMessage = "";
   user$ = this.userService.user$;
+  iconMenuContent:boolean = false;
   constructor(private authService: AuthService, private userService:UserService, private router:Router) {}
 
   openRegister() {
@@ -37,5 +38,10 @@ export class HeaderComponent {
       this.userService.init();
       this.router.navigate(['/home']);
     })
+  }
+
+  changeIconMenuContentStatus(){
+    console.log("ki")
+    this.iconMenuContent = !this.iconMenuContent;
   }
 }

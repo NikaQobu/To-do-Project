@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AddTask, ChangeTaskTatus } from '../int/requestsint';
+import { AddTask, ChangeTaskTatus, EditTaskInformation } from '../int/requestsint';
 import { UserService } from './user.service';
 import { Urls } from '../env/urls';
 import { BehaviorSubject } from 'rxjs';
@@ -15,7 +15,7 @@ export class TaskService {
   isOpenActivateTasksPage$ = new BehaviorSubject<any>(false);
   isOpenComplatedTaskPage$ = new BehaviorSubject<any>(false);
   isOpenAllTaskPage$ = new BehaviorSubject<any>(false);
-
+ 
   constructor(private http: HttpClient, private userService: UserService) {}
 
   addTask(data: AddTask) {
@@ -46,8 +46,8 @@ export class TaskService {
       .subscribe((response) => {
         this.activateTasks$.next(response.active_tasks);
         this.complatedTasks$.next(response.complated_tasks);
-        console.log(response.active_tasks)
-        console.log(response.complated_tasks)
+
+      
 
         
       });
@@ -69,5 +69,25 @@ export class TaskService {
         'X-CSRFToken': document.cookie.split('=')[1],
       }),
     })
+  }
+  getTask(id: number){
+    return this.http
+    .get<any>(`${this.baseUrl}/get_task/${id}`, {
+      withCredentials: true,
+      headers: new HttpHeaders({
+        'X-CSRFToken': document.cookie.split('=')[1],
+      }),
+    })
+
+  }
+
+  editTaskInformation(info:EditTaskInformation){
+    return this.http
+      .post<any>(`${this.baseUrl}/edit_task`, info, {
+        withCredentials: true,
+        headers: new HttpHeaders({
+          'X-CSRFToken': document.cookie.split('=')[1],
+        }),
+      })
   }
 }

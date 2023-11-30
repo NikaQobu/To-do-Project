@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { stat } from 'fs';
 import { catchError, of } from 'rxjs';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -15,7 +17,7 @@ export class TaskComponent implements OnInit {
   activateTasks$ = this.taskService.activateTasks$;
   errorMessage = '';
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, private router: Router) {
     this.activateTasks$.subscribe((response) => {
       console.log(response);
     });
@@ -41,19 +43,21 @@ export class TaskComponent implements OnInit {
       });
   }
   editTask(taskID: number) {
-    console.log(taskID);
+
+    this.router.navigate(['/edittask'], { queryParams: { id: taskID } });
+    
   }
-  activateTask(taskID: number) {
-    console.log(taskID);
-  }
-  complateTask(taskid: number, status:string) {
+
+
+
+  changeTaskStatus(taskid: number, status:string) {
+    console.log(status)
     let data = {
       taskid: taskid,
       status: status
     }
     this.taskService.changeTaskStatus(data).pipe().subscribe((response)=> {
       this.taskService.getTasks()
-      console.log(response)
     })
     
   }

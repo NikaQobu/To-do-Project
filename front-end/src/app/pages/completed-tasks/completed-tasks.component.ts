@@ -12,6 +12,6 @@ export class CompletedTasksComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.isOpenAllTaskPage$.next(false);
     this.taskService.isOpenActivateTasksPage$.next(false);
-    this.taskService.isOpenComplatedTaskPage$.next(false);
+    this.taskService.isOpenComplatedTaskPage$.next(true);
   }
 }

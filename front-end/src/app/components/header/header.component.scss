@@ -105,6 +105,31 @@
       .menu-icon {
         display: none;
       }
+      .menu-icon-content{
+        position: absolute;
+        z-index: 1;
+        ul{
+          width: 250px;
+          height: 200px;
+          background-color: $background;
+          display: flex;
+          flex-direction: column;
+          li{
+            width: 100%;
+            text-align: center;
+            border: 1px solid black;
+            background-color: $background;
+            a{
+              color: $text;
+              text-decoration: none;
+            }
+          }
+          li:hover{
+            cursor: pointer;
+            background-color: $hover;
+          }
+        }
+      }
     }
   }
 }
