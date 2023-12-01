@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -7,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { response } from 'express';
 import { catchError, of } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,7 +17,8 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
 })
-export class ChangePasswordComponent {
+export class ChangePasswordComponent implements OnInit {
+  user$ = this.userService.user$;
   errorMessage = '';
   succsessMessage = '';
   changePasswordData = this.fb.group({
@@ -31,11 +34,20 @@ export class ChangePasswordComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.controls['confirmPassword'].setValidators(
       this.confirmPasswordValidator(this.controls['newPassword'])
     );
+  }
+
+  ngOnInit(): void {
+    this.user$.subscribe((response) => {
+      if (!response) {
+        this.location.back();
+      }
+    });
   }
 
   get controls() {

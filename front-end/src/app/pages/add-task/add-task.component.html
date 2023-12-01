@@ -1,4 +1,4 @@
-<div class="add-task">
+<div class="add-task" *ngIf="user$ | async">
   <div class="container" [formGroup]="addTaskForm">
     <div class="inputs">
       <input

@@ -16,7 +16,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    router: Router,
+    private router: Router,
     private userService: UserService
   ) {}
 
@@ -45,8 +45,8 @@ export class AuthService {
     let user = '';
     this.userService.user$.pipe().subscribe((response) => {
       user = response.user;
+      this.router.navigate(['/home']);
     });
-    console.log(user);
     let data = {
       user: user,
     };

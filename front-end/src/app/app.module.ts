@@ -18,6 +18,7 @@ import { AddTaskComponent } from './pages/add-task/add-task.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 import { TaskComponent } from './components/task/task.component';
+import { ErrorComponent } from './pages/error/error.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { TaskComponent } from './components/task/task.component';
     ChangePasswordComponent,
     EditTaskComponent,
     TaskComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { response } from 'express';
@@ -32,7 +33,11 @@ export class ProfileComponent implements OnInit {
     phone: '',
   };
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
     let authorization = localStorage.getItem('userInfo');
@@ -50,6 +55,11 @@ export class ProfileComponent implements OnInit {
         this.startUserInfoData.lastname = response.lastname;
         this.userInfoData.phone = response.phone;
         this.startUserInfoData.phone = response.phone;
+      }
+    });
+    this.user$.subscribe((response) => {
+      if (!response) {
+        this.location.back();
       }
     });
   }

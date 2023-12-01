@@ -9,6 +9,7 @@ import { AddTaskComponent } from './pages/add-task/add-task.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
+import { ErrorComponent } from './pages/error/error.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'changepassword', component: ChangePasswordComponent },
   { path: 'edittask', component: EditTaskComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {path:'**', component: ErrorComponent}
 ];
 
 @NgModule({

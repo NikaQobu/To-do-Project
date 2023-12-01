@@ -1,0 +1,17 @@
+@import "../../share/colors.scss";
+@import "../../share/mixins.scss";
+@import "../../share/animations.scss";
+
+.error {
+  text-align: center;
+  font-size: 2rem;
+  color: $button;
+  min-height: 100vh;
+  h1 {
+    font-size: 7rem;
+    color: $button;
+  }
+  p {
+    margin-top: -4rem;
+  }
+}

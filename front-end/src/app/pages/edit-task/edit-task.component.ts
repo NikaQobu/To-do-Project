@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TaskService } from 'src/app/services/task.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-edit-task',
@@ -11,6 +12,7 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class EditTaskComponent implements OnInit {
   taskId = null;
+  user$ = this.userService.user$
   editTaskForm = this.fb.group({
     title: ['', [Validators.required]],
     deadline: ['', [Validators.required]],
@@ -22,7 +24,8 @@ export class EditTaskComponent implements OnInit {
     private fb: NonNullableFormBuilder,
     private taskService: TaskService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +46,11 @@ export class EditTaskComponent implements OnInit {
             .get('description')
             ?.setValue(response.taskInfo.description);
         });
+    });
+    this.user$.subscribe((response) => {
+      if (!response) {
+        this.location.back();
+      }
     });
   }
 

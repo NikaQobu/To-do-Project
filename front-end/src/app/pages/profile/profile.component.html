@@ -1,4 +1,4 @@
-<div class="profile">
+<div class="profile" *ngIf="user$ | async">
   <h3>User Information</h3>
   <div class="change-profile-img">
     <div
@@ -43,7 +43,10 @@
   <div class="full-container" *ngIf="isCorrectUserInfo">
     <div class="verify-container">
       <div class="text">
-        <p>For changes you must pass the verification, write into a correct password</p>
+        <p>
+          For changes you must pass the verification, write into a correct
+          password
+        </p>
       </div>
       <div class="inputs">
         <input type="password" [(ngModel)]="verifyPassword" />
