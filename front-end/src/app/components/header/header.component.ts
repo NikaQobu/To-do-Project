@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   errorMessage = '';
   user$ = this.userService.user$;
   iconMenuContent: boolean = false;
-  profileImg = '';
+  profileImg$ = this.userService.userProfileImg$;
   constructor(
     private authService: AuthService,
     private userService: UserService,
@@ -26,7 +26,9 @@ export class HeaderComponent implements OnInit {
         .getProfileImg(response.user)
         .pipe()
         .subscribe((response) => {
-          this.profileImg = `http://127.0.0.1:8000${response.userImage}`;
+          this.userService.userProfileImg$.next(
+            `http://127.0.0.1:8000${response.userImage}`
+          );
         });
     });
   }

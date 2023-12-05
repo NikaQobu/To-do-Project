@@ -5,18 +5,76 @@ from AuthApp.models import Users
 from AuthApp.validations import Validations
 from ProfileApp.models import UserProfile 
 import json
+import os
 
 
+def upload_profile_img(request):
+    if request.method == "POST":
+        try:
+            user = request.POST.get("user")
+            uploaded_file = request.FILES.get("file")
+            registered_user = Users.objects.filter(user=user).first()  # Assuming 'user' is the username
+
+            if registered_user:
+                user_profile = UserProfile.objects.filter(user_id=registered_user.userid).first()
+
+                if user_profile and uploaded_file:
+                    old_profile_picture = user_profile.profile_picture.path
+                    if os.path.exists(old_profile_picture) and os.path.basename(old_profile_picture) != 'default.jpeg':
+                        os.remove(old_profile_picture)
+
+                    # Save the uploaded file to the 'media/profile_pictures' folder
+                    file_path = f"{uploaded_file.name}"  # Adjust the path as needed
+                    user_profile.profile_picture = file_path
+                    user_profile.save()
+
+                    with open(f"media/{file_path}", 'wb+') as destination:
+                        for chunk in uploaded_file.chunks():
+                            destination.write(chunk)
+
+                    data = {
+                        "success": True,
+                        "message": "User image changed successfully",
+                        "status": 200
+                    }
+                else:
+                    data = {
+                        "success": False,
+                        "message": "Invalid file or user profile",
+                        "status": 403
+                    }
+            else:
+                data = {
+                    "success": False,
+                    "message": "User does not exist",
+                    "status": 400
+                }
+
+            return JsonResponse(data, status=data.get("status"))
+        except Exception as e:
+            data = {
+                "success": False,
+                "message": str(e),
+                "status": 409
+            }
+            return JsonResponse(data, status=data.get("status"))
+    else:
+        data = {
+            "success": False,
+            "message": "Invalid request method",
+            "status": 400
+        }
+        return JsonResponse(data, status=data.get("status"))
+    
+    
 def get_profile_image(request, user):
     if request.method == "GET":
-            print(user)
             try:
                 registered_user = Users.objects.filter(user=user).first()  # Assuming 'user' is the username
 
                 if registered_user:
                     user_profile = UserProfile.objects.filter(user_id=registered_user.userid).first()
                     profile_image = user_profile.profile_picture.url if user_profile.profile_picture else None
-                    print(profile_image)
                     if user_profile:
                         data = {
                             "success": True,

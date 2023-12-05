@@ -58,3 +58,8 @@ export interface EditTaskInformation {
   priority: string;
   taskId: number | null;
 }
+
+export interface UploadProfileImg {
+  user: string,
+  formData: FormData
+}

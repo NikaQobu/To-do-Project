@@ -6,7 +6,8 @@
       [style.backgroundImage]="'url(' + profileImg + ')'"
     ></div>
     <div class="change-img-btn">
-      <button>Change Picture</button>
+      <input type="file" #fileInput style="display: none" (change)="onFileSelected($event)">
+      <button (click)="fileInput.click()">Change Picture</button>
     </div>
   </div>
 

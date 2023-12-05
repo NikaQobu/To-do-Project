@@ -16,8 +16,8 @@ export class ProfileComponent implements OnInit {
   succsessMessage = '';
   verifyPassword = '';
   isCorrectUserInfo: boolean = false;
-
   profileImg = "";
+  
 
   startUserInfoData = {
     user: '',
@@ -39,6 +39,35 @@ export class ProfileComponent implements OnInit {
     private location: Location
   ) {}
 
+  onFileSelected(event: any): void {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      const selectedFile: File = fileList[0];
+
+      // Preview the selected image as the background of the div
+      this.previewImage(selectedFile);
+
+      // Proceed with uploading the image
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      formData.append('user', this.startUserInfoData.user);
+
+      this.userService.uploadProfileImg(formData).pipe().subscribe((response)=> {
+        this.userService.getProfileImg(this.startUserInfoData.user);
+        this.userService.userProfileImg$.next(this.profileImg);
+      });
+    }
+  }
+
+  previewImage(file: File): void {
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      // Set the preview image as the background of the div
+      this.profileImg = event.target.result;
+    };
+    reader.readAsDataURL(file); // Read the selected file as a data URL
+  }
+
   ngOnInit(): void {
     let authorization = localStorage.getItem('userInfo');
     if (!authorization) {
@@ -56,9 +85,13 @@ export class ProfileComponent implements OnInit {
         this.userInfoData.phone = response.phone;
         this.startUserInfoData.phone = response.phone;
 
-        this.userService.getProfileImg(response.user).pipe().subscribe((response)=> {
-          this.profileImg = `http://127.0.0.1:8000${response.userImage}`
-        });
+        this.userService
+          .getProfileImg(response.user)
+          .pipe()
+          .subscribe((response) => {
+            this.profileImg = `http://127.0.0.1:8000${response.userImage}`;
+            this.userService.userProfileImg$.next(this.profileImg);
+          });
       }
     });
     this.user$.subscribe((response) => {

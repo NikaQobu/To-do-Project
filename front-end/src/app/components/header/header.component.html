@@ -44,7 +44,7 @@
           </div>
         </li>
         <li class="logged-in dropdown drop-icon">
-          <div [style.backgroundImage]="'url(' + profileImg + ')'" class="profile-img" ></div>
+          <div [style.backgroundImage]="'url(' + (profileImg$ | async) + ')'" class="profile-img" ></div>
           <div class="dropdown-content">
             <a routerLink="/addtask">Add Task</a>
             <a routerLink="/profile">Profile</a>
