@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   verifyPassword = '';
   isCorrectUserInfo: boolean = false;
 
-  profileImg = 'http://127.0.0.1:8000/media/default.jpeg';
+  profileImg = "";
 
   startUserInfoData = {
     user: '',
@@ -55,6 +55,10 @@ export class ProfileComponent implements OnInit {
         this.startUserInfoData.lastname = response.lastname;
         this.userInfoData.phone = response.phone;
         this.startUserInfoData.phone = response.phone;
+
+        this.userService.getProfileImg(response.user).pipe().subscribe((response)=> {
+          this.profileImg = `http://127.0.0.1:8000${response.userImage}`
+        });
       }
     });
     this.user$.subscribe((response) => {

@@ -19,6 +19,7 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 import { TaskComponent } from './components/task/task.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { FilterbypriorityPipe } from './pipes/filterbypriority.pipe';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ErrorComponent } from './pages/error/error.component';
     EditTaskComponent,
     TaskComponent,
     ErrorComponent,
+    FilterbypriorityPipe,
   ],
   imports: [
     BrowserModule,

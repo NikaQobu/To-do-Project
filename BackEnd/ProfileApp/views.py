@@ -3,8 +3,57 @@ from django.middleware.csrf import get_token
 from django.contrib.auth.hashers import check_password, make_password
 from AuthApp.models import Users
 from AuthApp.validations import Validations
+from ProfileApp.models import UserProfile 
 import json
 
+
+def get_profile_image(request, user):
+    if request.method == "GET":
+            print(user)
+            try:
+                registered_user = Users.objects.filter(user=user).first()  # Assuming 'user' is the username
+
+                if registered_user:
+                    user_profile = UserProfile.objects.filter(user_id=registered_user.userid).first()
+                    profile_image = user_profile.profile_picture.url if user_profile.profile_picture else None
+                    print(profile_image)
+                    if user_profile:
+                        data = {
+                            "success": True,
+                            "userImage": profile_image,
+                            "message": "User image got successfully",
+                            "csrf_token": get_token(request),
+                            "status": 200
+                         }
+                    else:
+                        data = {
+                            "success": False,
+                            "message": "User profile is not correct",
+                            "csrf_token": get_token(request),
+                            "status": 403
+                        }
+                else:
+                    data = {
+                        "success": False,
+                        "message": "User does not exist",
+                        "csrf_token": get_token(request),
+                        "status": 400
+                    }
+                return JsonResponse(data, status=data.get("status"))
+            except Exception as e:
+                data = {
+                    "success": False,
+                    "message": str(e),
+                    "status": 409
+                }
+                return JsonResponse(data, status=data.get("status"))
+    else:
+        data = {
+            "success": False,
+            "message": "Invalid request method",
+            "status": 400
+        }
+        return JsonResponse(data, status=data.get("status")) 
 
 def check_profile_info(request):
     if request.method == "POST":
@@ -15,7 +64,6 @@ def check_profile_info(request):
             phone = response.get("phone")
             user = response.get("user")
 
-            print(name,lastName,phone,user)
 
             if Validations.is_valid_name(name) == False:
                 data = {

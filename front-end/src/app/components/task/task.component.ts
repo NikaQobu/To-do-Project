@@ -1,11 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { stat } from 'fs';
 import { catchError, of } from 'rxjs';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
-
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',

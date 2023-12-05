@@ -19,9 +19,11 @@
       gap: 1rem;
       justify-content: space-between;
       .complated-task {
-        max-width: 500px;
         margin: auto;
         border: 1px solid black;
+        width: 32%;
+        min-width: 300px;
+        height: 450px;
         .btns {
           text-align: end;
           padding: 0.5rem 0rem;
@@ -41,7 +43,15 @@
             border: 1px solid black;
           }
           td {
-            width: 100px;
+            max-width: 100px;
+            vertical-align: top;
+            textarea{
+              height: 50px;
+              max-width: 100px;
+              resize: none;
+              border: none;
+              outline: none;
+            }
           }
         }
         .description {
@@ -49,8 +59,13 @@
             text-align: center;
             margin: 0.5rem 0rem;
           }
-          p {
-            padding-left: 0.5rem;
+          textarea{
+            width: 100%;
+            resize: none;
+            outline: none;
+            border: none;
+            padding-left: .5rem;
+            height: 120px;
           }
         }
       }

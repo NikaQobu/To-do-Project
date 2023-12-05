@@ -1,8 +1,13 @@
 <app-header></app-header>
-<div *ngIf="isOpenlogin | async" class="login">
-  <app-login></app-login>
+
+<div class="main-content">
+  <div *ngIf="isOpenlogin | async" class="login">
+    <app-login></app-login>
+  </div>
+  <div *ngIf="isOpenRegister | async" class="register">
+    <app-register></app-register>
+  </div>
+  <router-outlet></router-outlet>
 </div>
-<div *ngIf="isOpenRegister | async" class="register">
-  <app-register></app-register>
-</div>
-<router-outlet></router-outlet>
+
+<app-footer></app-footer>

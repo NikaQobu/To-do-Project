@@ -1,0 +1,14 @@
+@media only screen and (max-width: 1000px) {
+  .footer {
+    .container {
+      width: 100% !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 310px) {
+    .more{
+        font-size: 1rem !important;
+        bottom: 2.2rem !important;
+    }
+  }

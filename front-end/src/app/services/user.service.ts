@@ -47,9 +47,19 @@ export class UserService {
     });
   }
 
+  getProfileImg(user: string) {
+     return this.http
+      .get<any>(`${this.baseUrl}/get_profile_image/${user}`, {
+        withCredentials: true,
+        headers: new HttpHeaders({
+          'X-CSRFToken': document.cookie.split('=')[1],
+        }),
+      })
+
+  }
+
   init() {
     let user = localStorage.getItem('userInfo');
-
     if (user) {
       this.user$.next(JSON.parse(user));
     } else {

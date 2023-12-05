@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/home']);
           this.userService.init();
           this.taskService.getTasks();
+          this.userService.getProfileImg(response.user_info.user);
         }
       });
   }

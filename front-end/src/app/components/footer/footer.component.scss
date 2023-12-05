@@ -1,0 +1,36 @@
+@import "./media/footerMedia.scss";
+@import "../../share/colors.scss";
+@import "../../share/mixins.scss";
+@import "../../share/animations.scss";
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.footer{
+    position: relative;
+    width: 100%;
+    .container {
+        width: 90%;
+        margin: auto;
+        background-color: $background;
+        color: $text;
+        padding: 2rem 0rem;
+        text-align: center;
+        .line {
+          padding: 0rem .5rem;
+      
+        }
+        a {
+          color: $text;
+          text-decoration: none;
+      
+          .more {
+            position: absolute;
+            bottom: 1.2rem;
+            margin-top: 0.5rem;
+            font-size: 2.8rem;
+          }
+        }
+      }
+}
