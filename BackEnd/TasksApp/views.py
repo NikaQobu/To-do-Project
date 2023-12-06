@@ -3,6 +3,7 @@ from django.middleware.csrf import get_token
 from django.http import JsonResponse
 from AuthApp.models import Users
 from TasksApp.models import Tasks
+from django.utils import timezone
 import json
 
 def edit_task(request):
@@ -55,6 +56,7 @@ def edit_task(request):
         return JsonResponse(data, status=data.get("status"))
 
 
+
 def get_task(request,taskid):
     if request.method == "GET":
         try:
@@ -103,8 +105,10 @@ def get_tasks(request,user):
         try:
             registered_user = Users.objects.filter(user=user).first()
             tasks = Tasks.objects.filter(user_id=registered_user.userid)
+            current_date = timezone.now().date() 
             active_tasks = []
             complated_tasks = []
+            notification_tasks = []
             for task in tasks:
                 info = {
                     "taskID": task.taskid,
@@ -116,13 +120,19 @@ def get_tasks(request,user):
                 }
                 if task.status == "active":
                     active_tasks.append(info)
+                    if task.deadline <= current_date: 
+                        notification_tasks.append(info)
                 else:
                     complated_tasks.append(info)
+                    
+                    
+                
                 
             data = {
                 "success": True,
                 "active_tasks": active_tasks,
                 "complated_tasks": complated_tasks,
+                "notification_tasks": notification_tasks,
                 "message": "Tasks got successfully",
                 "csrf_token": get_token(request),
                 "status": 200
@@ -241,7 +251,7 @@ def change_task_status(request):
                 task.save()
                 data = {
                     "success": True,
-                    "message": "Tasks deleted successfully",
+                    "message": "Task status changed successfully",
                     "csrf_token": get_token(request),
                     "status": 200
                     }

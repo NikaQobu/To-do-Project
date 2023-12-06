@@ -28,18 +28,27 @@
       <ul *ngIf="!(user$ | async)">
         <li class="auth-text" (click)="openLogin()">Log In</li>
         <li class="auth-text" (click)="openRegister()">Registration</li>
-        <li class="auth-icon">
+        <li class="auth-icon" (click)="changeIconAuthContentStatus()">
           <span class="material-symbols-outlined"> menu </span>
         </li>
       </ul>
+      <div class="auth-icon-content" *ngIf="iconAuthContent">
+        <ul>
+          <li (click)="openLogin()"><a >Log In</a></li>
+          <li (click)="openRegister()"><a >Registration</a></li>
+        </ul>
+      </div>
       <ul *ngIf="user$ | async">
-        <li class="logged-in">
-          <div class="notifications">
+        <li routerLink="/notificationtasks" class="logged-in">
+          <div  class="notifications">
             <span class="material-symbols-outlined">
               notifications_active
             </span>
-            <div class="count">
-              <span>0</span>
+            <div class="count" *ngIf="notificationsCount$ | async">
+              <span>{{ notificationsCount$ | async }}</span>
+            </div>
+            <div class="count-zero" *ngIf="!(notificationsCount$ | async)">
+              <span>{{ 0 }}</span>
             </div>
           </div>
         </li>

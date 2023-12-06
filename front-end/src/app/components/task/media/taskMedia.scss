@@ -2,13 +2,38 @@
   .all-tasks {
     width: 100% !important;
   }
+  .filter{
+    width: 40% !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .filter{
+    width: 60% !important;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .filter{
+    width: 70% !important;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .filter{
+    width: 80% !important;
+  }
 }
 
 @media only screen and (max-width: 310px) {
+  .filter{
+    width: 90% !important;
+  }
   .table {
     font-size: 0.7rem !important;
   }
   .complated-task {
     min-width: 260px !important;
   }
+  
 }

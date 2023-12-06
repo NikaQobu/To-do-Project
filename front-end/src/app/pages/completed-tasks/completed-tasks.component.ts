@@ -13,5 +13,6 @@ export class CompletedTasksComponent implements OnInit {
     this.taskService.isOpenAllTaskPage$.next(false);
     this.taskService.isOpenActivateTasksPage$.next(false);
     this.taskService.isOpenComplatedTaskPage$.next(true);
+    this.taskService.isOpenNotificationTaskPage$.next(false);
   }
 }

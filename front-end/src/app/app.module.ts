@@ -20,6 +20,7 @@ import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 import { TaskComponent } from './components/task/task.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { FilterbypriorityPipe } from './pipes/filterbypriority.pipe';
+import { NotificationTasksComponent } from './pages/notification-tasks/notification-tasks.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { FilterbypriorityPipe } from './pipes/filterbypriority.pipe';
     TaskComponent,
     ErrorComponent,
     FilterbypriorityPipe,
+    NotificationTasksComponent,
   ],
   imports: [
     BrowserModule,

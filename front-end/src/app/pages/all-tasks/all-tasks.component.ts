@@ -13,6 +13,7 @@ export class AllTasksComponent implements OnInit {
     this.taskService.isOpenAllTaskPage$.next(true);
     this.taskService.isOpenActivateTasksPage$.next(false);
     this.taskService.isOpenComplatedTaskPage$.next(false);
+    this.taskService.isOpenNotificationTaskPage$.next(false);
     
   }
 }

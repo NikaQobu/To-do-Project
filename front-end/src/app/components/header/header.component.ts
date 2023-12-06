@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,11 +14,15 @@ export class HeaderComponent implements OnInit {
   errorMessage = '';
   user$ = this.userService.user$;
   iconMenuContent: boolean = false;
+  iconAuthContent: boolean = false;
   profileImg$ = this.userService.userProfileImg$;
+  notificationsCount$ = this.taskService.notificationsCount$;
+
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private taskService: TaskService
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +41,7 @@ export class HeaderComponent implements OnInit {
   openRegister() {
     this.authService.isOpenRegister$.next(true);
     this.authService.isOpenLogin$.next(false);
+    
   }
   openLogin() {
     this.authService.isOpenRegister$.next(false);
@@ -57,12 +63,13 @@ export class HeaderComponent implements OnInit {
         localStorage.removeItem('userInfo');
         localStorage.removeItem('token');
         this.userService.init();
-        this.router.navigate(['/home']);
       });
   }
 
   changeIconMenuContentStatus() {
-    console.log('ki');
     this.iconMenuContent = !this.iconMenuContent;
+  }
+  changeIconAuthContentStatus() {
+    this.iconAuthContent = !this.iconAuthContent;
   }
 }

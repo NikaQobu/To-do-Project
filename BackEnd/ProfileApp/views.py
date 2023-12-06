@@ -66,7 +66,6 @@ def upload_profile_img(request):
         }
         return JsonResponse(data, status=data.get("status"))
     
-    
 def get_profile_image(request, user):
     if request.method == "GET":
             try:

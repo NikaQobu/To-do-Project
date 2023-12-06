@@ -1,18 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filterbypriority'
+  name: 'filterByPriority'
 })
 export class FilterbypriorityPipe implements PipeTransform {
-
-  transform(arr: any[], ...args: unknown[]): any[] {
-    if (arr) {
-      let ans = arr.filter(item => item.priority == 'medium');
-      console.log("shemovei")
-      return ans; 
+  transform(arr: any[], filterBy: string): any[] {
+    if (arr && filterBy != "All") {
+      let ans = arr.filter(item => item.priority === filterBy);
+      console.log("shemovei");
+      return ans;
     }
-  
-    return []; 
+    return arr;
   }
-
 }

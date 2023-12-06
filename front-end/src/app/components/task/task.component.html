@@ -1,104 +1,125 @@
+<div class="filter">
+  <select name="priority-level" [(ngModel)]="tasksFilter">
+    <option value="All">All</option>
+    <option value="Low">Low</option>
+    <option value="Medium">Medium</option>
+    <option value="High">High</option>
+  </select>
+</div>
 <div class="all-tasks" *ngIf="user$ | async">
   <div class="complated-tasks">
-    <div class="complated-tasks">
-      <div class="complated-tasks-container" *ngIf="isOpenAllTaskPage$ | async">
-        <div class="complated-task" *ngFor="let task of activateTasks$ | async">
-          <div class="btns">
-            <button (click)="changeTaskStatus(task.taskID, 'complated')">
-              Complate
-            </button>
-            <button (click)="editTask(task.taskID)">Edit</button>
-            <button (click)="deleteTask(task.taskID)">Delete</button>
-          </div>
-          <table class="table">
-            <tr>
-              <th>Title</th>
-              <th>Deadline</th>
-              <th>Priority Level</th>
-              <th>Status</th>
-            </tr>
-            <td>
+    <div class="complated-task">
+      <div class="all-tasks-container" *ngIf="isOpenAllTaskPage$ | async">
+        <div class="complated-tasks-container">
+          <div
+            class="complated-task"
+            *ngFor="
+              let task of activateTasks$
+                | async
+                | filterByPriority : tasksFilter
+            "
+          >
+            <div class="btns">
+              <button (click)="changeTaskStatus(task.taskID, 'complated')">
+                Complate
+              </button>
+              <button (click)="editTask(task.taskID)">Edit</button>
+              <button (click)="deleteTask(task.taskID)">Delete</button>
+            </div>
+            <table class="table">
+              <tr>
+                <th>Title</th>
+                <th>Deadline</th>
+                <th>Priority Level</th>
+                <th>Status</th>
+              </tr>
+              <td>
+                <textarea
+                  readonly
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="10"
+                  value="{{ task.title }}"
+                ></textarea>
+              </td>
+
+              <td>
+                <span>{{ task.deadline }}</span>
+              </td>
+              <td>
+                <span>{{ task.priority }}</span>
+              </td>
+              <td>
+                <span>{{ task.status }}</span>
+              </td>
+            </table>
+            <div class="description">
+              <h3>Description</h3>
               <textarea
                 readonly
                 name=""
                 id=""
                 cols="30"
                 rows="10"
-                value="{{ task.title }}"
+                value="{{ task.description }}"
               ></textarea>
-            </td>
+            </div>
+          </div>
+          <div
+            class="complated-task"
+            *ngFor="
+              let task of complatedTasks$
+                | async
+                | filterByPriority : tasksFilter
+            "
+          >
+            <div class="btns">
+              <button (click)="changeTaskStatus(task.taskID, 'active')">
+                Activate
+              </button>
+              <button (click)="editTask(task.taskID)">Edit</button>
+              <button (click)="deleteTask(task.taskID)">Delete</button>
+            </div>
+            <table class="table">
+              <tr>
+                <th>Title</th>
+                <th>Deadline</th>
+                <th>Priority Level</th>
+                <th>Status</th>
+              </tr>
+              <td>
+                <textarea
+                  readonly
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="10"
+                  value="{{ task.title }}"
+                ></textarea>
+              </td>
 
-            <td>
-              <span>{{ task.deadline }}</span>
-            </td>
-            <td>
-              <span>{{ task.priority }}</span>
-            </td>
-            <td>
-              <span>{{ task.status }}</span>
-            </td>
-          </table>
-          <div class="description">
-            <h3>Description</h3>
-            <textarea
-              readonly
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-              value="{{ task.description }}"
-            ></textarea>
-          </div>
-        </div>
-        <div
-          class="complated-task"
-          *ngFor="let task of complatedTasks$ | async"
-        >
-          <div class="btns">
-            <button (click)="changeTaskStatus(task.taskID, 'active')">
-              Activate
-            </button>
-            <button (click)="editTask(task.taskID)">Edit</button>
-            <button (click)="deleteTask(task.taskID)">Delete</button>
-          </div>
-          <table class="table">
-            <tr>
-              <th>Title</th>
-              <th>Deadline</th>
-              <th>Priority Level</th>
-              <th>Status</th>
-            </tr>
-            <td>
+              <td>
+                <span>{{ task.deadline }}</span>
+              </td>
+              <td>
+                <span>{{ task.priority }}</span>
+              </td>
+              <td>
+                <span>{{ task.status }}</span>
+              </td>
+            </table>
+            <div class="description">
+              <h3>Description</h3>
               <textarea
                 readonly
                 name=""
                 id=""
                 cols="30"
                 rows="10"
-                value="{{ task.title }}"
+                value="{{ task.description }}"
               ></textarea>
-            </td>
-
-            <td>
-              <span>{{ task.deadline }}</span>
-            </td>
-            <td>
-              <span>{{ task.priority }}</span>
-            </td>
-            <td>
-              <span>{{ task.status }}</span>
-            </td>
-          </table>
-          <div class="description">
-            <h3>Description</h3>
-            <textarea
-              readonly
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-              value="{{ task.description }}"
-            ></textarea>
+            </div>
           </div>
         </div>
       </div>
@@ -108,7 +129,9 @@
       >
         <div
           class="complated-task"
-          *ngFor="let task of activateTasks$ | async as tasks"
+          *ngFor="
+            let task of activateTasks$ | async | filterByPriority : tasksFilter
+          "
         >
           <div class="test">
             <div class="btns">
@@ -166,11 +189,72 @@
       >
         <div
           class="complated-task"
-          *ngFor="let task of complatedTasks$ | async"
+          *ngFor="
+            let task of complatedTasks$ | async | filterByPriority : tasksFilter
+          "
         >
           <div class="btns">
             <button (click)="changeTaskStatus(task.taskID, 'active')">
               Activate
+            </button>
+            <button (click)="editTask(task.taskID)">Edit</button>
+            <button (click)="deleteTask(task.taskID)">Delete</button>
+          </div>
+          <table class="table">
+            <tr>
+              <th>Title</th>
+              <th>Deadline</th>
+              <th>Priority Level</th>
+              <th>Status</th>
+            </tr>
+            <td>
+              <textarea
+                readonly
+                name=""
+                id=""
+                cols="30"
+                rows="10"
+                value="{{ task.title }}"
+              ></textarea>
+            </td>
+            <td>
+              <span>{{ task.deadline }}</span>
+            </td>
+            <td>
+              <span>{{ task.priority }}</span>
+            </td>
+            <td>
+              <span>{{ task.status }}</span>
+            </td>
+          </table>
+          <div class="description">
+            <h3>Description</h3>
+            <textarea
+              readonly
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              value="{{ task.description }}"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div
+        class="complated-tasks-container"
+        *ngIf="isOpenNotificationTaskPage$ | async"
+      >
+        <div
+          class="complated-task notification-task"
+          *ngFor="
+            let task of notificationTasks$
+              | async
+              | filterByPriority : tasksFilter
+          "
+        >
+          <div class="btns">
+            <button (click)="changeTaskStatus(task.taskID, 'complated')">
+              Complate
             </button>
             <button (click)="editTask(task.taskID)">Edit</button>
             <button (click)="deleteTask(task.taskID)">Delete</button>

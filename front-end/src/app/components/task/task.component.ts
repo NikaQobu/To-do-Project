@@ -12,10 +12,14 @@ import { UserService } from 'src/app/services/user.service';
 export class TaskComponent implements OnInit {
   isOpenActivateTasksPage$ = this.taskService.isOpenActivateTasksPage$;
   isOpenComplatedTaskPage$ = this.taskService.isOpenComplatedTaskPage$;
+  isOpenNotificationTaskPage$ = this.taskService.isOpenNotificationTaskPage$;
   isOpenAllTaskPage$ = this.taskService.isOpenAllTaskPage$;
   complatedTasks$ = this.taskService.complatedTasks$;
   activateTasks$ = this.taskService.activateTasks$;
+  notificationTasks$ = this.taskService.notificationTasks$;
   errorMessage = '';
+  tasksFilter = "All"
+
 
   user$ = this.userService.user$;
 

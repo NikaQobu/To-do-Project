@@ -10,6 +10,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { NotificationTasksComponent } from './pages/notification-tasks/notification-tasks.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'activetasks', component: ActiveTasksComponent },
   { path: 'alltasks', component: AllTasksComponent },
   { path: 'complatedtasks', component: CompletedTasksComponent },
+  { path: 'notificationtasks', component: NotificationTasksComponent },
   { path: 'addtask', component: AddTaskComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'changepassword', component: ChangePasswordComponent },
