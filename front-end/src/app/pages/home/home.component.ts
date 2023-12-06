@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomeComponent {
   test$ = this.authService.isOpenRegister$;
+  user$ = this.userService.user$;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private userService: UserService) {}
 
   register() {
     this.authService.isOpenRegister$.next(true);

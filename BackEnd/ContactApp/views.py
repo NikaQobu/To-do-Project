@@ -38,7 +38,7 @@ def send_email(request):
                         "status": 400
                     } 
             else:
-                send_mail(name, message, from_email, email)
+                #send_mail(name, message, from_email, email)
                 data = {
                         "success": True,
                         "message": "Email received successfully",
