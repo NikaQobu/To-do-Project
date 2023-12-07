@@ -11,8 +11,9 @@ import { TaskService } from './services/task.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  isOpenlogin = this.authService.isOpenLogin$;
-  isOpenRegister = this.authService.isOpenRegister$;
+  isOpenlogin$ = this.authService.isOpenLogin$;
+  isOpenRegister$ = this.authService.isOpenRegister$;
+  isOpenRecovery$ = this.authService.isOpenRecovery$
 
   constructor(
     private authService: AuthService,
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit {
     ) {
       this.authService.isOpenRegister$.next(false);
       this.authService.isOpenLogin$.next(false);
+      this.authService.isOpenRecovery$.next(false);
     }
   }
 

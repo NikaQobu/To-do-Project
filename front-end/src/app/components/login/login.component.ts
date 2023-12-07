@@ -32,9 +32,17 @@ export class LoginComponent implements OnInit {
   openRegister() {
     this.authService.isOpenRegister$.next(true);
     this.authService.isOpenLogin$.next(false);
+    this.authService.isOpenRecovery$.next(false);
+  }
+
+  openRecovery() {
+    this.authService.isOpenRegister$.next(false);
+    this.authService.isOpenLogin$.next(false);
+    this.authService.isOpenRecovery$.next(true);
   }
 
   login() {
+    this.errorMessage = "";
     let data = {
       user: this.loginForm.get('user')?.value || '',
       password: this.loginForm.get('password')?.value || '',

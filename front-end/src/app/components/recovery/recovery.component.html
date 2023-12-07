@@ -1,0 +1,22 @@
+<div class="recovery">
+  <div class="move-container">
+    <div class="container">
+      <div class="inputs" [formGroup]="recoveryForm">
+        <input placeholder="User" type="text" formControlName="user" />
+        <input placeholder="Phone Number" type="text" formControlName="phone" />
+      </div>
+
+      <div class="validation-error" *ngIf="errorMessage">
+        * {{ errorMessage }}
+      </div>
+
+      <div class="btn">
+        <button (click)="send()">Send</button>
+      </div>
+      <div class="text">
+        <a (click)="openRegister()">Create Account</a>
+        <a (click)="openLogin()">log In</a>
+      </div>
+    </div>
+  </div>
+</div>

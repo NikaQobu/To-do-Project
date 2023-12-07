@@ -202,3 +202,55 @@ def logout(request):
     }
     return JsonResponse(data, status = data.get("status"))
 
+def recovery_info(request):
+    if request.method == "POST":
+        try:
+            response = json.loads(request.body.decode("utf-8"))
+            user = response.get("user")
+            phone = response.get("phone")
+            
+            
+            # Check if user exists
+            registered_user = Users.objects.filter(user=user).first()
+                
+                
+            if registered_user:
+                
+                # Compare hashed passwords
+                if registered_user.phone == phone:
+                    # send message to phone number  
+                    data = {
+                        "success": True,
+                        "message": "Password sended successfully",
+                        "csrf_token": get_token(request),
+                        "status": 200
+                    }
+                else:
+                    data = {
+                        "success": False,
+                        "message": "Username or phone is incorrect",
+                        "csrf_token": get_token(request),
+                        "status": 403
+                    }
+            else:
+                data = {
+                    "success": False,
+                    "message": "User does not exist",
+                    "csrf_token": get_token(request),
+                    "status": 400
+                }
+            return JsonResponse(data, status = data.get("status"))
+        
+        except Exception as e:
+            data = {
+                "success": False,
+                "message": str(e),
+                "status": 500
+            }
+            return JsonResponse(data,status = data.get("status"))
+    data = {
+        "success": False,
+        "message": "Invalid request method",
+        "status": 400
+    }
+    return JsonResponse(data, status = data.get("status"))

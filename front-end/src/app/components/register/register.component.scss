@@ -49,6 +49,9 @@
       .text {
         width: 80%;
         margin: auto;
+        a{
+          margin: 0rem 1rem;
+        }
         a:hover {
           cursor: pointer;
           color: $hover;

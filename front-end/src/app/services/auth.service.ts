@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { SendLoginRequest, SendRegisterRequest } from '../int/requestsint';
+import { Recovery, SendLoginRequest, SendRegisterRequest } from '../int/requestsint';
 import { Urls } from '../env/urls';
 import { UserService } from './user.service';
 
@@ -12,6 +12,7 @@ import { UserService } from './user.service';
 export class AuthService {
   isOpenLogin$ = new BehaviorSubject<boolean>(false);
   isOpenRegister$ = new BehaviorSubject<boolean>(false);
+  isOpenRecovery$ = new BehaviorSubject<boolean>(false);
   baseUrl = new Urls().base;
 
   constructor(
@@ -36,6 +37,13 @@ export class AuthService {
 
   login(data: SendLoginRequest) {
     return this.http.post<any>(`${this.baseUrl}/login`, data, {
+      withCredentials: true,
+      headers: this.getHeaderTokenFromCooki(),
+    });
+  }
+
+  recovery(data: Recovery) {
+    return this.http.post<any>(`${this.baseUrl}/recovery_info`, data, {
       withCredentials: true,
       headers: this.getHeaderTokenFromCooki(),
     });

@@ -21,6 +21,7 @@ import { TaskComponent } from './components/task/task.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { FilterbypriorityPipe } from './pipes/filterbypriority.pipe';
 import { NotificationTasksComponent } from './pages/notification-tasks/notification-tasks.component';
+import { RecoveryComponent } from './components/recovery/recovery.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { NotificationTasksComponent } from './pages/notification-tasks/notificat
     ErrorComponent,
     FilterbypriorityPipe,
     NotificationTasksComponent,
+    RecoveryComponent,
   ],
   imports: [
     BrowserModule,

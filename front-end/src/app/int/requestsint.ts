@@ -60,6 +60,11 @@ export interface EditTaskInformation {
 }
 
 export interface UploadProfileImg {
-  user: string,
-  formData: FormData
+  user: string;
+  formData: FormData;
+}
+
+export interface Recovery {
+  user: string;
+  phone: string;
 }

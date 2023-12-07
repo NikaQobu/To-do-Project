@@ -1,12 +1,17 @@
 <app-header></app-header>
 
 <div class="main-content">
-  <div *ngIf="isOpenlogin | async" class="login">
+  <div *ngIf="isOpenlogin$ | async" class="login">
     <app-login></app-login>
   </div>
-  <div *ngIf="isOpenRegister | async" class="register">
+  <div *ngIf="isOpenRegister$ | async" class="register">
     <app-register></app-register>
   </div>
+
+  <div *ngIf="isOpenRecovery$ | async" class="recovery">
+    <app-recovery></app-recovery>
+  </div>
+
   <router-outlet></router-outlet>
 </div>
 

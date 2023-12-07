@@ -41,7 +41,6 @@ export class HeaderComponent implements OnInit {
   openRegister() {
     this.authService.isOpenRegister$.next(true);
     this.authService.isOpenLogin$.next(false);
-    
   }
   openLogin() {
     this.authService.isOpenRegister$.next(false);

@@ -71,6 +71,12 @@ export class RegisterComponent {
   openLogin() {
     this.authService.isOpenRegister$.next(false);
     this.authService.isOpenLogin$.next(true);
+    this.authService.isOpenRecovery$.next(false);
+  }
+  openRecovery() {
+    this.authService.isOpenRegister$.next(false);
+    this.authService.isOpenLogin$.next(false);
+    this.authService.isOpenRecovery$.next(true);
   }
 
   register() {
