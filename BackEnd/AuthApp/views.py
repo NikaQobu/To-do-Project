@@ -6,6 +6,10 @@ import json
 from .models import Users
 from ProfileApp.models import UserProfile
 from AuthApp.validations import Validations
+import string
+import random
+import requests
+
 
 
 
@@ -202,14 +206,19 @@ def logout(request):
     }
     return JsonResponse(data, status = data.get("status"))
 
+def generate_random_string(length):
+    alphabet = string.ascii_letters + string.digits
+    return ''.join(random.choice(alphabet) for _ in range(length))
+
 def recovery_info(request):
     if request.method == "POST":
         try:
             response = json.loads(request.body.decode("utf-8"))
             user = response.get("user")
-            phone = response.get("phone")
-            
-            
+            to_number = response.get("phone")
+            message_text = generate_random_string(8)
+            from_number = "ImportBase"
+            api_key = "eb5fa4a53adcf0aea173bd9c437d7be88545dcd6d2d8852d8a13066b96826959"; 
             # Check if user exists
             registered_user = Users.objects.filter(user=user).first()
                 
@@ -217,14 +226,50 @@ def recovery_info(request):
             if registered_user:
                 
                 # Compare hashed passwords
-                if registered_user.phone == phone:
-                    # send message to phone number  
-                    data = {
-                        "success": True,
-                        "message": "Password sended successfully",
-                        "csrf_token": get_token(request),
-                        "status": 200
+                if registered_user.phone == to_number:
+                    
+                    # Endpoint URL
+                    url = 'https://api.gosms.ge/api/sendsms'
+
+                    # Query parameters
+                    params = {
+                        'api_key': api_key,
+                        'from': from_number,
+                        'to': to_number,
+                        'text': message_text
                     }
+
+                    try:
+                        response = requests.get(url, params=params)
+
+               
+                        if response.status_code == 200:
+                            hashed_password = make_password(message_text)
+                            registered_user.password = hashed_password
+                            registered_user.save()
+                            data = {
+                            "success": True,
+                            "message": "Password sended successfully",
+                            "csrf_token": get_token(request),
+                            "status": 200
+                            }
+                        else:
+                            data = {
+                            "success": True,
+                            "message": "Failed to send SMS.",
+                            "csrf_token": get_token(request),
+                            "status": 409
+                            }
+
+                    except requests.RequestException as e:
+                            data = {
+                            "success": True,
+                            "message": "Request failed.",
+                            "csrf_token": get_token(request),
+                            "status": 403
+                            }
+                            return JsonResponse(data, status = data.get("status"))
+                    
                 else:
                     data = {
                         "success": False,
