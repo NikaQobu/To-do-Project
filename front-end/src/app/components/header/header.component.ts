@@ -41,10 +41,12 @@ export class HeaderComponent implements OnInit {
   openRegister() {
     this.authService.isOpenRegister$.next(true);
     this.authService.isOpenLogin$.next(false);
+    this.authService.isOpenRecovery$.next(false);
   }
   openLogin() {
     this.authService.isOpenRegister$.next(false);
     this.authService.isOpenLogin$.next(true);
+    this.authService.isOpenRecovery$.next(false);
   }
 
   logout() {
